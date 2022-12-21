@@ -4,6 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
+      <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300;1,400&display=swap" rel="stylesheet" />
       <body>
         <Main />
         <NextScript />
@@ -11,3 +15,6 @@ export default function Document() {
     </Html>
   )
 }
+
+
+
