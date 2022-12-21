@@ -20,6 +20,7 @@ const Input = styled.input`
       font-size: 15px;
       line-height: 18px;
       color: #FFFFFF;
+      text-indent: 12px;
 }
 `;
 

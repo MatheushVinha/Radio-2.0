@@ -46,7 +46,7 @@ const SectionConta = styled.section`
   }
 `;
 
-module.exports = function Conta() {
+module.exports = function Entrar() {
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -54,18 +54,15 @@ module.exports = function Conta() {
 
   return (
     <SectionConta>
-      <h1 className="title__perfil">Crie sua conta</h1>
+      <h1 className="title__perfil">Entrar</h1>
       <form >
-        <div className="div_input">
-          <Input id="name" placeholder="Nome" />
-        </div>
         <div className="div_input">
           <Input id="email" placeholder="Email" />
         </div>
         <div className="div_input">
           <Input id="senha" placeholder="Senha" />
         </div>
-        <MyButton onClick={handleSubmit}>registrar</MyButton>
+        <MyButton onClick={handleSubmit}>Entrar</MyButton>
       </form>
 
       <div className="Logins__button">
@@ -75,7 +72,7 @@ module.exports = function Conta() {
 
       <span className="Text__ou">ou</span>
 
-      <MyButton>Entrar</MyButton>
+      <MyButton>Registrar</MyButton>
     </SectionConta>
   )
 }
