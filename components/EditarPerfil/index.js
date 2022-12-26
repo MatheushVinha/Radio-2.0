@@ -1,10 +1,7 @@
 const { default: styled } = require("styled-components");
 import MyButton from "../Button"
-import GoogleButton from "../GoogleButton";
-import FacebookButton from "../FacebookButton";
 import Input from "../Input";
 import ChangeFotoButton from "./ChangeFotoButton";
-
 
 const SectionConta = styled.section`
   display: flex;
@@ -87,7 +84,6 @@ module.exports = function EditarPerfil({setCurrentComponent}) {
     <SectionConta>
       <h1 className="title__perfil">Editar Perfil</h1>
       <form >
-
         <div className='photo-container'>
           <ChangeFotoButton className='change-photo-button' ></ChangeFotoButton>
         </div>

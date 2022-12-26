@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
-import Music__display from '../../Music__display';
+import Music__display from '../../MusicCard';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 const elements = [<Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />,];

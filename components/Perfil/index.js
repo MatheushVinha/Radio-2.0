@@ -1,4 +1,4 @@
-import Music__display from "../Music__display";
+import Music__display from "../MusicCard";
 const { default: styled } = require("styled-components");
 const confg = require('../../Config.json')
 import image_config from '../../public/Engrenagem.png'
