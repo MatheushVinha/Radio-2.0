@@ -5,8 +5,8 @@ import config from "../../Config.json"
 
 const Conteiner = styled.div`
   background-color: red;
-  width: 86%;
-  height: 11%;
+  width: 374px;
+  height: 69px;
 
   background: #262626;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -14,6 +14,7 @@ const Conteiner = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  
 
   margin: 15px 0 0 0;
 
@@ -48,6 +49,7 @@ const Conteiner = styled.div`
     width: 30px;
     height: 30px;
     margin: auto 0;
+    cursor: pointer;
   }
 `
 

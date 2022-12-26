@@ -46,11 +46,12 @@ const SectionConta = styled.section`
   }
 `;
 
-module.exports = function Entrar() {
+module.exports = function Entrar({setCurrentComponent}) {
 
-  function handleSubmit(event) {
+  const handleClick = (event) => {
     event.preventDefault();
-  }
+    // outro código aqui
+  };
 
   return (
     <SectionConta>
@@ -62,7 +63,7 @@ module.exports = function Entrar() {
         <div className="div_input">
           <Input id="senha" placeholder="Senha" />
         </div>
-        <MyButton onClick={handleSubmit}>Entrar</MyButton>
+        <MyButton onClick={() => {handleClick, setCurrentComponent("A") }}>Entrar</MyButton>
       </form>
 
       <div className="Logins__button">
@@ -72,7 +73,7 @@ module.exports = function Entrar() {
 
       <span className="Text__ou">ou</span>
 
-      <MyButton>Registrar</MyButton>
+      <MyButton onClick={() => setCurrentComponent("B")}>Registrar</MyButton>
     </SectionConta>
   )
 }

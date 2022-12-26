@@ -2,7 +2,10 @@ const { default: styled } = require("styled-components")
 const Conta = require("../components/Conta")
 const Entrar = require("../components/Entrar")
 const { default: Musicas_Populares } = require("../components/Musicas_Populares")
+const { default: Perfil } = require("../components/Perfil")
 const Radio = require("../components/Radio")
+const EditarPerfil = require("../components/EditarPerfil")
+const { useState } = require("react")
 
 const DivStyled = styled.div`
   display: flex;
@@ -10,9 +13,16 @@ const DivStyled = styled.div`
 `
 
 module.exports = function app() {
+
+  const [currentComponent, setCurrentComponent] = useState('B');
+
   return (
     <DivStyled>
-      <Entrar />
+      {currentComponent === 'A' ? <Perfil setCurrentComponent={setCurrentComponent} /> : null}
+      {currentComponent === 'B' ? <Conta setCurrentComponent={setCurrentComponent} /> : null}
+      {currentComponent === 'C' ? <Entrar setCurrentComponent={setCurrentComponent} /> : null}
+      {currentComponent === 'D' ? <EditarPerfil setCurrentComponent={setCurrentComponent} /> : null}
+
       <Radio />
       <Musicas_Populares />
     </DivStyled>

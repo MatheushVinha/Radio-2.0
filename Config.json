@@ -1,7 +1,12 @@
 {
   "musica": {
     "titulo": "Hayloft 2",
-    "image": "https://lastfm.freetls.fastly.net/i/u/500x500/edf35e0664db4941a804c150e211900b.jpg",
+    "image": "https://i1.sndcdn.com/artworks-000605692489-uaxscf-t500x500.jpg",
     "autor": "Moder moder"
+  },
+  "perfil": {
+    "imagem": "https://assets-prd.ignimgs.com/avatars/60c2802105e46b08d6543423/5A469C5D-2BDE-437F-87A1-8DD71C6AF4D9-1657950814431.jpeg",
+    "nome": "Gabriel",
+    "job": "canBoy"
   }
 }

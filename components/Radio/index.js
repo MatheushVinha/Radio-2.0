@@ -51,6 +51,7 @@ const Conteiner = styled.div`
   .play__button {
     width: 137px;
     height: 137px;
+    cursor: pointer;
   }
 
 `
