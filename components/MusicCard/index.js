@@ -57,12 +57,12 @@ export default function Music__display() {
   return (
 
     <Conteiner>
-      <img className="music__image" src={config.musica.image} />
+      <img className="music__image" alt="music card image" src={config.musica.image} />
       <div className="text__conteiner">
         <p className="music__name" >{config.musica.titulo}</p>
         <p className="music__autor" >Autor: {config.musica.autor}</p>
       </div>
-      <Image className="heart__image" src={coração} />
+      <Image alt="Heart image" className="heart__image" src={coração} />
     </Conteiner>
 
   )

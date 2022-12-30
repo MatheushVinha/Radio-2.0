@@ -21,9 +21,9 @@ const ButtonText = styled.span`
   color: #FFFFFF;
 `;
 
-export default function MyButton({children, onClick,...props}) {
+export default function MyButton({children, onClick, type,...props}) {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} type={type}>
       <ButtonText>{children}</ButtonText>
     </Button>
   );

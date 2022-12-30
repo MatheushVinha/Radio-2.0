@@ -68,12 +68,12 @@ module.exports = function Radio() {
 
       <span className="music__title">{config.musica.titulo}</span>
       <div className="conteiner__image">
-        <img className="image" src={config.musica.image} />
+        <img className="image" alt="Capa da musica" src={config.musica.image} />
       </div>
       <span className="music__altor">{config.musica.autor}</span>
-      <Image className="play__button" src={botão_stop} />
+      <Image className="play__button" alt="play__button" src={botão_stop} />
 
-      <Background image={config.musica.image} />
+      <Background image={config.musica.image} alt="Capa da musica" />
 
     </Conteiner>
   )

@@ -1,8 +1,7 @@
 import styled from "styled-components"
 import Music__display from "../MusicCard"
 import { Scrollbars } from 'react-custom-scrollbars';
-import { useMemo, useState } from "react";
-
+import { useEffect, useMemo, useState } from "react";
 
 const Conteiner = styled.div`
   display: flex;
@@ -56,10 +55,21 @@ const elements = [<Music__display />, <Music__display />, <Music__display />, <M
 
 export default function Musicas_Populares() {
   const [numElements, setNumElements] = useState(5);
+  const [data, setData] = useState(null);
 
   const displayedElements = useMemo(() => elements.slice(0, numElements), [numElements]);
+
+  // const fetchAll = async () => {
+  //   const elements = await fetch("/api/hello")
+  //   const data = await elements.json();
+  //   console.log(data)
+  //  setData(data.name)
+  // }
+
+  // fetchAll()
   return (
     <Conteiner>
+      <p>{data}</p>
       <h3 className="title__text">Musicas mais votadas</h3>
       <>
         <Scrollbars style={{ width: '100%', height: '100%' }}>

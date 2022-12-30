@@ -1,10 +1,10 @@
 const { default: styled } = require("styled-components")
-const Conta = require("../components/Conta")
-const Entrar = require("../components/Entrar")
-const { default: Musicas_Populares } = require("../components/Musicas_Populares")
-const { default: Perfil } = require("../components/Perfil")
+const Conta = require("../components/RegistrationForm")
+const Entrar = require("../components/LoginForm")
 const Radio = require("../components/Radio")
 const EditarPerfil = require("../components/EditarPerfil")
+const { default: Musicas_Populares } = require("../components/PopularSongs")
+const { default: Perfil } = require("../components/Perfil")
 const { useState } = require("react")
 
 const DivStyled = styled.div`

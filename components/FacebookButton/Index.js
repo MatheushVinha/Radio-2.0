@@ -37,7 +37,7 @@ export default function FacebookButton({ children, ...props }) {
     <>
       <Button>
         <ButtonText>{children}</ButtonText>
-        <Image className='Img' src={logo} />
+        <Image className='Img' alt="Face image" src={logo} />
       </Button>
     </>
   );

@@ -3,6 +3,7 @@ import MyButton from "../Button"
 import GoogleButton from "../GoogleButton";
 import FacebookButton from "../FacebookButton";
 import Input from "../Input";
+import { useState } from "react";
 
 const SectionConta = styled.section`
   display: flex;
@@ -46,27 +47,69 @@ const SectionConta = styled.section`
   }
 `;
 
-module.exports = function Conta({setCurrentComponent}) {
+module.exports = function Conta({ setCurrentComponent }) {
+  const [nome, setNome] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [senha, setSenha] = useState(null)
 
-  const handleClick = (event) => {
+
+  const handleClick = async (event) => {
     event.preventDefault();
-    // outro código aqui
+
+    
+
+    await fetch('/api/createUser', {
+      method: 'POST',
+      body:   JSON.stringify({
+        name: nome,
+        email: email,
+        senha: senha,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(response => console.log(response))
+
   };
 
   return (
     <SectionConta>
       <h1 className="title__perfil">Crie sua conta</h1>
-      <form >
+      <form onSubmit={handleClick} >
         <div className="div_input">
-          <Input id="name" placeholder="Nome" />
+          <Input
+            type={"text"}
+            id="name"
+            placeholder="Nome"
+            required
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
         </div>
         <div className="div_input">
-          <Input id="email" placeholder="Email" />
+          <Input
+            type={"email"}
+            id="email"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="div_input">
-          <Input id="senha" placeholder="Senha" />
+          <Input
+            type={"password"}
+            id="senha"
+            placeholder="Senha"
+            required
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+
+          />
         </div>
-        <MyButton  onClick={() => {handleClick,  setCurrentComponent("A")}}>registrar</MyButton>
+        <MyButton type={"submit"} onClick={() => { /* ,setCurrentComponent("A") */ }}>registrar</MyButton>
       </form>
 
       <div className="Logins__button">

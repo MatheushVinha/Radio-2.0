@@ -37,7 +37,7 @@ export default function GoogleButton({ children, ...props }) {
     <>
       <Button>
         <ButtonText>{children}</ButtonText>
-        <Image className='Img' src={logo} />
+        <Image className='Img' alt="Google image" src={logo} />
       </Button>
     </>
   );

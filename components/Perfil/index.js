@@ -1,10 +1,11 @@
-import Music__display from "../MusicCard";
 const { default: styled } = require("styled-components");
-const confg = require('../../Config.json')
 import image_config from '../../public/Engrenagem.png'
 import Image from "next/image";
 import FavoriteSongs from "./Favorit-song";
+import { useEffect, useState } from "react";
+import Loading from "../Loading";
 
+const confg = require('../../Config.json')
 
 const SectionConta = styled.section`
   display: flex;
@@ -54,7 +55,6 @@ const SectionConta = styled.section`
     line-height: 18px;
     color: #AAA0A0;
     
-
   }
   .favorite-songs-section {
     width: 100%;
@@ -95,15 +95,41 @@ const SectionConta = styled.section`
 
 `;
 
-export default function Perfil({setCurrentComponent}) {
+export default function Perfil({ setCurrentComponent }) {
+
+  const [dados, setDados] = useState(null)
+
+  const fetchAll = async (id) => await fetch('/api/userAlth')
+    .then(response => response.json())
+    .then(dados => {
+      const data = dados.data.user[id]
+      return data
+    });
+
+  fetchAll(0)
+
+  useEffect(() => {
+    async function carregarDados() {
+      const dados = await fetchAll(0)
+      setDados(dados)
+    }
+    carregarDados()
+
+  },[])
+
+  if (!dados) {
+    return <Loading />
+  }
+  const nome = dados.name
+  const recado = dados.Recado
 
   return (
     <SectionConta>
-      <Image className='configure-button' src={image_config} onClick={() => setCurrentComponent('D')}/>
+      <Image className='configure-button' alt="configure-button" src={image_config} onClick={() => setCurrentComponent('D')} />
       <section className='section-container'>
-        <img src={confg.perfil.imagem} className='profile-image'></img>
-        <span className='profile-name'>{confg.perfil.nome}</span>
-        <span className='profile-job'>{confg.perfil.job}</span>
+        <img src={confg.perfil.imagem} alt="imagem de perfil"  className='profile-image'></img>
+        <span className='profile-name'>{nome}</span>
+        <span className='profile-job'>{recado}</span>
       </section>
       <FavoriteSongs />
     </SectionConta>

@@ -41,7 +41,6 @@ function FavoriteSongs() {
   return (
     <>
       <FavoriteSongsTitle>Suas Musicas Favoritas</FavoriteSongsTitle>
-      
       <Scrollbars style={{ width: '100%', height: '100%' }}>
         <FavoriteSongsSection>
           {displayedElements.map((element) => (

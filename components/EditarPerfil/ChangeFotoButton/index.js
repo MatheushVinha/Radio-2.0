@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import config from '../../../Config.json'
 
 
 const Conteiner = styled.div`
@@ -29,8 +30,6 @@ const Conteiner = styled.div`
     cursor: pointer;
   }
 `
-
-
 function ChangeFotoButton() {
   const [image, setImage] = useState(null);
 
@@ -47,11 +46,11 @@ function ChangeFotoButton() {
   return (
     <Conteiner>
       {image ? (
-        <img className='photo' src={URL.createObjectURL(image)} alt="Selected image" />
+        <img className='photo' src={config.perfil.imagem = URL.createObjectURL(image)} alt="Selected image" />
       ) : (
         <img
           className='photo'
-          src="https://assets-prd.ignimgs.com/avatars/60c2802105e46b08d6543423/5A469C5D-2BDE-437F-87A1-8DD71C6AF4D9-1657950814431.jpeg"
+          src={config.perfil.imagem}
           alt="Placeholder image"
         />
       )}
