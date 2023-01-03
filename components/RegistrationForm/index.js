@@ -48,19 +48,19 @@ const SectionConta = styled.section`
 `;
 
 module.exports = function Conta({ setCurrentComponent }) {
-  const [nome, setNome] = useState(null)
-  const [email, setEmail] = useState(null)
-  const [senha, setSenha] = useState(null)
+  const [nome, setNome] = useState("")
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
 
 
   const handleClick = async (event) => {
     event.preventDefault();
 
-    
+
 
     await fetch('/api/createUser', {
       method: 'POST',
-      body:   JSON.stringify({
+      body: JSON.stringify({
         name: nome,
         email: email,
         senha: senha,
@@ -70,7 +70,7 @@ module.exports = function Conta({ setCurrentComponent }) {
       }
     })
       .then(response => response.json())
-      .then(response => console.log(response))
+      .then(response => console.log( response))
 
   };
 

@@ -97,7 +97,7 @@ const SectionConta = styled.section`
 
 export default function Perfil({ setCurrentComponent }) {
 
-  const [dados, setDados] = useState(null)
+  const [dados, setDados] = useState(" ")
 
   const fetchAll = async (id) => await fetch('/api/userAlth')
     .then(response => response.json())
