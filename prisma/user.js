@@ -14,6 +14,15 @@ export const getUser = async id => {
   return user
 }
 
+//READ BY EMAIL
+
+export const getUserByemail = async email => {
+  const user = await prisma.user.findUnique({
+    where: { email }
+  })
+  return user
+}
+
 // CREATE
 export const createUser = async (name, email, recado, senha, perfil) => {
   const user = await prisma.user.create({
@@ -30,13 +39,27 @@ export const createUser = async (name, email, recado, senha, perfil) => {
 
 // UPDATE
 export const updateUser = async (id, updateData) => {
+  
+  const data = {};
+  if (updateData.name) {
+    data.name = updateData.name;
+  }
+  if (updateData.email) {
+    data.email = updateData.email;
+  }
+  if (updateData.senha) {
+    const senha = Number(updateData.senha);
+    data.senha =senha
+  }
+  if (updateData.recado) {
+    data.recado = updateData.recado;
+  }
+  
   const user = await prisma.user.update({
     where: {
       id
     },
-    data: {
-      ...updateData
-    }
+    data
   })
   return user
 }

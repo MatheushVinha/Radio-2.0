@@ -52,25 +52,37 @@ module.exports = function Conta({ setCurrentComponent }) {
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
 
-
   const handleClick = async (event) => {
     event.preventDefault();
+    try {
+      await fetch(`/api/user`, {
+        method: 'POST',
+        body: JSON.stringify({
+          name: nome,
+          email: email,
+          senha: senha,
+          recado: "Novato",
+          perfil: "https://www.promoview.com.br/uploads/2017/04/b72a1cfe.png"
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(response => {
+          if (response.erro) {
+            throw new Error("Usuario com esse email ja existe")
+          }else(
+            console.log(response),
+            localStorage.setItem('id', response.user.id),
+            console.log(localStorage.getItem('id')),
+            setCurrentComponent("A")
 
-
-
-    await fetch('/api/createUser', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: nome,
-        email: email,
-        senha: senha,
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(response => console.log( response))
+          )
+        })
+    } catch (error) {
+      alert(error)
+    }
 
   };
 
@@ -90,6 +102,7 @@ module.exports = function Conta({ setCurrentComponent }) {
         </div>
         <div className="div_input">
           <Input
+
             type={"email"}
             id="email"
             placeholder="Email"
@@ -109,7 +122,7 @@ module.exports = function Conta({ setCurrentComponent }) {
 
           />
         </div>
-        <MyButton type={"submit"} onClick={() => { /* ,setCurrentComponent("A") */ }}>registrar</MyButton>
+        <MyButton type="submit" onClick={() => { /* ,setCurrentComponent("A") */ }}>registrar</MyButton>
       </form>
 
       <div className="Logins__button">

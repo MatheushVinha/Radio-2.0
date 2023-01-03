@@ -97,39 +97,31 @@ const SectionConta = styled.section`
 
 export default function Perfil({ setCurrentComponent }) {
 
-  const [dados, setDados] = useState(" ")
-
-  const fetchAll = async (id) => await fetch('/api/userAlth')
-    .then(response => response.json())
-    .then(dados => {
-      const data = dados.data.user[id]
-      return data
-    });
-
-  fetchAll(0)
-
+  const [dados, setDados] = useState("")
   useEffect(() => {
-    async function carregarDados() {
-      const dados = await fetchAll(0)
-      setDados(dados)
+    const usuarioId = localStorage.getItem("id");
+    if (!usuarioId) {
+      setCurrentComponent('A')
     }
-    carregarDados()
-
-  },[])
+    async function fetchData() {
+      await fetch(`/api/user?id=${usuarioId}`)
+        .then(response => response.json())
+        .then(response => setDados(response))
+    }
+    fetchData()
+  }, [])
 
   if (!dados) {
     return <Loading />
   }
-  const nome = dados.name
-  const recado = dados.Recado
 
   return (
     <SectionConta>
       <Image className='configure-button' alt="configure-button" src={image_config} onClick={() => setCurrentComponent('D')} />
       <section className='section-container'>
-        <img src={confg.perfil.imagem} alt="imagem de perfil"  className='profile-image'></img>
-        <span className='profile-name'>{nome}</span>
-        <span className='profile-job'>{recado}</span>
+        <img src={dados.perfil} alt="imagem de perfil" className='profile-image'></img>
+        <span className='profile-name'>{dados.name}</span>
+        <span className='profile-job'>{dados.recado}</span>
       </section>
       <FavoriteSongs />
     </SectionConta>

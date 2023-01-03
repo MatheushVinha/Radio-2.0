@@ -5,7 +5,7 @@ const Radio = require("../components/Radio")
 const EditarPerfil = require("../components/EditarPerfil")
 const { default: Musicas_Populares } = require("../components/PopularSongs")
 const { default: Perfil } = require("../components/Perfil")
-const { useState } = require("react")
+const { useState, useEffect } = require("react")
 
 const DivStyled = styled.div`
   display: flex;

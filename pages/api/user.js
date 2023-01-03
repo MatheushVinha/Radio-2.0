@@ -3,7 +3,8 @@ import {
   deleteUser,
   getAllUsers,
   getUser,
-  updateUser
+  updateUser,
+  getUserByemail
 } from '../../prisma/user'
 
 export default async function handle(req, res) {
@@ -21,8 +22,15 @@ export default async function handle(req, res) {
       }
       case 'POST': {
         const { name, email, recado, senha, perfil } = req.body
-        const user = await createUser(name, email, recado, senha, perfil)
-        return res.json(user)
+
+        const emailExist = await getUserByemail(email)
+
+        if (emailExist) {
+          return res.status(400).json({ msg: 'Email já existente', erro: true })
+        }
+
+        const user = await createUser(name, email, recado, Number(senha), perfil)
+        return res.json({ user, erro: false })
       }
       case 'PUT': {
         const { id, ...updateData } = req.body
@@ -42,40 +50,3 @@ export default async function handle(req, res) {
     return res.status(500).json({ ...error, message: error.message })
   }
 }
-
-
-
-
-// const { method } = req;
-
-//   if (method === "GET") {
-
-//     const user = await prisma.user.findMany()
-
-//     res.status(200).json({
-//       data: {
-//         user
-//       },
-//     })
-
-//   } else if (method === "POST") {
-
-//     try {
-
-//       const { name } = req.body;
-
-//       const user = await prisma.user.create({
-//         data: {
-//           name
-//         }
-//       })
-//       return res.status(201).json({
-//         data: user,
-//       })
-//     } catch (error) {
-//       return res.status(404).json({ message: error })
-//     }
-
-//   }
-
-//   return res.status(404).json({ message: "Route not found" })

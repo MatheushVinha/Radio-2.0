@@ -1,4 +1,5 @@
 const { default: styled } = require("styled-components");
+import { useState } from "react";
 import MyButton from "../Button"
 import Input from "../Input";
 import ChangeFotoButton from "./ChangeFotoButton";
@@ -74,33 +75,71 @@ const SectionConta = styled.section`
   
 `;
 
-module.exports = function EditarPerfil({setCurrentComponent}) {
+module.exports = function EditarPerfil({ setCurrentComponent }) {
+  const [nome, setNome] = useState("")
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState(0)
+  const [recado, setRecado] = useState("")
 
-  function handleSubmit(event) {
+
+   async function handleSubmit(event) {
     event.preventDefault();
+    
+    console.log({nome: nome, email: email, senha: senha})
+
+    try {
+      await fetch(`/api/user`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          id: "63b2cc6ff8ab976e8a2b7e97",
+          name: nome,
+          email: email,
+          senha: senha,
+          recado: recado
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .then(response => {
+          setCurrentComponent("A")
+        })
+    } catch (error) {
+      alert(error)
+    }
+
   }
 
   return (
     <SectionConta>
       <h1 className="title__perfil">Editar Perfil</h1>
-      <form >
+      <form onSubmit={handleSubmit} >
         <div className='photo-container'>
           <ChangeFotoButton className='change-photo-button' ></ChangeFotoButton>
         </div>
 
         <div className="div_input">
-          <Input id="name" placeholder="Nome" />
+          <Input id="name" placeholder="Nome" value={nome}
+            onChange={(e) => setNome(e.target.value)} />
         </div>
         <div className="div_input">
-          <Input id="email" placeholder="Email" />
+          <Input id="email" placeholder="Email" value={email}
+            onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="div_input">
-          <Input id="senha" placeholder="Senha" />
+          <Input id="senha" placeholder="Senha" value={senha}
+            onChange={(e) => setSenha(e.target.value)} />
         </div>
-        <MyButton onClick={() => {handleSubmit,setCurrentComponent("A")}}>Salvar</MyButton>
+        <div className="div_input">
+          <Input id="recado" placeholder="Reacado" value={recado}
+            onChange={(e) => setRecado(e.target.value)} />
+        </div>
+        <MyButton  type="submit"onClick={() => { /*setCurrentComponent("A")*/ }}>Salvar</MyButton>
         <div>
 
-        <button className="logout-text" onClick={() => setCurrentComponent('B')}>Sair da conta</button>
+          <button type="submit" className="logout-text" onClick={() => setCurrentComponent('B')}>Sair da conta</button>
         </div>
       </form>
     </SectionConta>

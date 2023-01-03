@@ -35,7 +35,7 @@ function ChangeFotoButton() {
 
   const handleChange = (event) => {
     const file = event.target.files[0];
-    
+
     if (!file.type.startsWith('image/png') && !file.type.startsWith('image/jpeg')) {
       alert('Por favor, selecione uma imagem no formato PNG ou JPEG.');
       return

@@ -3,6 +3,7 @@ import MyButton from "../Button"
 import GoogleButton from "../GoogleButton";
 import FacebookButton from "../FacebookButton";
 import Input from "../Input";
+import { useState } from "react";
 
 const SectionConta = styled.section`
   display: flex;
@@ -46,24 +47,55 @@ const SectionConta = styled.section`
   }
 `;
 
-module.exports = function Entrar({setCurrentComponent}) {
+module.exports = function Entrar({ setCurrentComponent }) {
 
-  const handleClick = (event) => {
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
+
+  const handleClick = async (event) => {
     event.preventDefault();
-    // outro código aqui
-  };
 
+    try {
+      await fetch(`/api/authUser`, {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email,
+          senha: senha,
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+
+      }).then(response => response.json())
+        .then(response => {
+          if (response.erro) {
+            throw new Error("Emal ou senha incorretos")
+          } else (
+            console.log(response),
+            localStorage.setItem('id', response.user.id),
+            console.log(localStorage.getItem('id')),
+            setCurrentComponent("A")
+
+          )
+        })
+    } catch (error) {
+      alert(error)
+    }
+
+  }
   return (
     <SectionConta>
       <h1 className="title__perfil">Entrar</h1>
-      <form >
+      <form onSubmit={handleClick} >
         <div className="div_input">
-          <Input id="email" placeholder="Email" />
+          <Input id="email" type={"email"} placeholder="Email" value={email}
+            onChange={(e) => setEmail(e.target.value)} required />
         </div>
         <div className="div_input">
-          <Input id="senha" placeholder="Senha" />
+          <Input id="senha" type={"password"} placeholder="Senha" value={senha}
+            onChange={(e) => setSenha(e.target.value)} required />
         </div>
-        <MyButton onClick={() => {handleClick, setCurrentComponent("A") }}>Entrar</MyButton>
+        <MyButton onClick={() => { handleClick /*, setCurrentComponent("A")*/ }}>Entrar</MyButton>
       </form>
 
       <div className="Logins__button">
