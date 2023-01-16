@@ -17,3 +17,4 @@ model User {
   senha     Int
   perfil    String?
 }
+
