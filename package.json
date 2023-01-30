@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "license": "MIT",
   "dependencies": {
     "@next/font": "13.0.7",
     "@prisma/client": "^4.8.0",
