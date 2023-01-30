@@ -1,10 +1,9 @@
 const { default: styled } = require("styled-components")
-import { useEffect } from 'react'
-import botão_play from '../../public/play_button/play.svg'
-import botão_stop from '../../public/play_button/Play_pause.svg'
-import Image from 'next/image'
+import { createRef, useEffect, useState } from 'react'
 import Background from './BackGround'
-import config from "../../Config.json"
+import PlayPauseButton from './PlayPauseButton'
+import Loading from '../Loading'
+import { createContext } from 'vm'
 
 const Conteiner = styled.div`
   width: 33%;
@@ -33,7 +32,8 @@ const Conteiner = styled.div`
     
   }
   .image {
-    width: 100%;
+    width: 100% ;
+    height: 100% ;
   }
   
   .music__altor {
@@ -42,8 +42,9 @@ const Conteiner = styled.div`
     font-weight: 400;
     font-size: 30px;
     line-height: 36px;  
-    margin: 5% 40% 5% 0;
+    margin: 5% 0% 5% 0;
     color: #FFFFFF;
+    width: 100%;
 
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
@@ -54,27 +55,83 @@ const Conteiner = styled.div`
     cursor: pointer;
   }
 
+  .autor-image__conteiner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 65%;
+    
+  }
+
+  .Heart {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+  }
+
 `
 module.exports = function Radio() {
+  const referencia = createRef()
+  const [isLoading, setIsLoading] = useState(true);
+  const [musicData, setMusicData] = useState()
+  const MyContext = createContext();
+
+
+  async function fetchData() {
+    setIsLoading(true);
+    await fetch('api/getMusic')
+      .then(res => res.json()).then(data => setMusicData(data))
+    setIsLoading(false);
+  }
+
+  function endedMusic() {
+    setIsLoading(true);
+    fetchData()
+    setIsLoading(false);
+    
+  }
 
   useEffect(() => {
-    const backgroundElement = document.querySelector('.background')
-    backgroundElement.style.filter = 'blur(2px)'
-  }, [config.musica.image])
+    fetchData()
+  }, [])
 
+  if (isLoading) {
+    return <Loading />
+  }
+
+  async function ClickFunction() {
+    const aValue = localStorage.getItem("id");
+    if (!aValue) {
+      //TODO: Tenho que mudar isso em 
+      alert("Voce não ta logado")
+    }
+    await fetch('api/favMusic', {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: aValue,
+        currentMusic: musicData.id
+        
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+  }
 
   return (
     <Conteiner>
-
-      <span className="music__title">{config.musica.titulo}</span>
+      <span className="music__title">{musicData.nome}</span>
       <div className="conteiner__image">
-        <img className="image" alt="Capa da musica" src={config.musica.image} />
+        <img className="image" alt="Capa da musica" src={musicData.image} />
       </div>
-      <span className="music__altor">{config.musica.autor}</span>
-      <Image className="play__button" alt="play__button" src={botão_stop} />
-
-      <Background image={config.musica.image} alt="Capa da musica" />
-
+      <div className='autor-image__conteiner'>
+        <span className="music__altor">{musicData.autor}</span>
+        <img src={'/coração.png'} className='Heart' onClick={() => ClickFunction()} ></img>
+      </div>
+      <audio autoPlay src={musicData.music} onEnded={() => { endedMusic() }} ref={referencia} />
+      <PlayPauseButton referencia={referencia} />
+      <Background image={musicData.image} alt="Capa da musica" />
     </Conteiner>
   )
 }

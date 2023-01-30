@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
 import coração from "../../public/coração.png"
-import config from "../../Config.json"
 
 const Conteiner = styled.div`
   background-color: red;
@@ -53,14 +52,14 @@ const Conteiner = styled.div`
   }
 `
 
-export default function Music__display() {
+export default function Music__display({props}) {
   return (
 
     <Conteiner>
-      <img className="music__image" alt="music card image" src={config.musica.image} />
+      <img className="music__image" alt="music card image" src={props.image} />
       <div className="text__conteiner">
-        <p className="music__name" >{config.musica.titulo}</p>
-        <p className="music__autor" >Autor: {config.musica.autor}</p>
+        <p className="music__name" >{props.nome}</p>
+        <p className="music__autor" >Autor: {props.autor}</p>
       </div>
       <Image alt="Heart image" className="heart__image" src={coração} />
     </Conteiner>

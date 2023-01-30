@@ -13,6 +13,9 @@ const DivStyled = styled.div`
 `
 
 module.exports = function app() {
+  useEffect(() => {
+    localStorage.clear()
+  },[])
 
   const [currentComponent, setCurrentComponent] = useState('B');
 

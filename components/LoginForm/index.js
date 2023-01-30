@@ -71,9 +71,10 @@ module.exports = function Entrar({ setCurrentComponent }) {
           if (response.erro) {
             throw new Error("Emal ou senha incorretos")
           } else (
-            console.log(response),
+            // console.log(response),
             localStorage.setItem('id', response.user.id),
-            console.log(localStorage.getItem('id')),
+            localStorage.setItem('logado', true),
+            // console.log(localStorage.getItem('id')),
             setCurrentComponent("A")
 
           )

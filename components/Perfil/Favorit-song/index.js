@@ -1,18 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 import Music__display from '../../MusicCard';
 import { Scrollbars } from 'react-custom-scrollbars';
+import Loading from "../../Loading";
 
-const elements = [<Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />, <Music__display />,];
-
-const FavoriteSongsSection = styled.section`
-  width: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 const FavoriteSongsTitle = styled.span`
   font-family: 'Lato';
   font-style: normal;
@@ -33,31 +24,56 @@ const ShowMore = styled.h3`
   margin-bottom: 2%;
 `;
 
-function FavoriteSongs() {
-  const [numElements, setNumElements] = useState(3);
+const ScrollBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
 
-  const displayedElements = useMemo(() => elements.slice(0, numElements), [numElements]);
+function FavoriteSongs() {
+  const [musicas, setMusicas] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  async function pegarmusicas() {
+    setIsLoading(true);
+    const aValue = localStorage.getItem("id");
+    await fetch('api/userFavMusic', {
+      method: 'POST',
+      body: JSON.stringify({
+        idUsuario: aValue,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    )
+      .then(response => response.json())
+      // .then(response => console.log(response))
+      .then(response => setMusicas(response))
+    setIsLoading(false);
+  }
+
+
+  useEffect(() => {
+    pegarmusicas()
+  }, [])
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <>
       <FavoriteSongsTitle>Suas Musicas Favoritas</FavoriteSongsTitle>
-      <Scrollbars style={{ width: '100%', height: '100%' }}>
-        <FavoriteSongsSection>
-          {displayedElements.map((element) => (
-            <div>{element}</div>
+        <Scrollbars style={{ width: '100%', height: '100%' }}>
+      <ScrollBox >
+          {musicas.map(music => (
+            <Music__display key={music.id} props={music} />
           ))}
-
-        </FavoriteSongsSection>
-      </Scrollbars>
-      {numElements < elements.length && (
-        <ShowMore onClick={() => setNumElements(elements.length)}>
-          Ver mais
-        </ShowMore>
-      )}
-      {
-        numElements === elements.length && (
-          <ShowMore onClick={() => setNumElements(3)}>Ver menos</ShowMore>
-        )}
+      </ScrollBox>
+        </Scrollbars>
     </>
   );
 }

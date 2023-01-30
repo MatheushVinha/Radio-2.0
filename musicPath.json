@@ -1,0 +1,87 @@
+[
+  {
+    "title": "O Grilo",
+    "author": "GriloTube",
+    "music": "/music/O_Grilo.mp3",
+    "image": "/images/O_Grilo.png"
+  },
+  {
+    "title": "PHONKMASTA",
+    "author": "SAOTO MAMORE",
+    "music": "/music/PHONKMASTA.mp3",
+    "image": "/images/PHONKMASTA.jpg"
+  },
+  {
+    "title": "90MH",
+    "author": "TREFUEGO",
+    "music": "/music/90MH.mp3",
+    "image": "/images/90MH.jpg"
+  },
+  {
+    "title": "505",
+    "author": "Arctic Monkeys",
+    "music": "/music/505(MP3_320K).mp3",
+    "image": "/images/505.jpg"
+  },
+  {
+    "title": "After Dark",
+    "author": "Mr. Kitty",
+    "music": "/music/After_Dark.mp3",
+    "image": "/images/After_Dark.jpg"
+  },
+  {
+    "title": "alt-J (∆) ",
+    "author": "Breezeblocks",
+    "music": "/music/altJBreezeblocks.mp3",
+    "image": "/images/altJBreezeblocks.jpg"
+  },
+  {
+    "title": "Bezos I x Gimme",
+    "author": "SAOTO MAMORE",
+    "music": "/music/Bezos.mp3",
+    "image": "/images/Bezos.jpg"
+  },
+  {
+    "title": "fashion week",
+    "author": "blackbear",
+    "music": "/music/blackbear.mp3",
+    "image": "/images/blackbear.jpg"
+  },
+  {
+    "title": "Crucified",
+    "author": "Gost",
+    "music": "/music/Crucified.mp3",
+    "image": "/images/Crucified.jpg"
+  },
+  {
+    "title": "Get Lucky",
+    "author": "Daft Punk",
+    "music": "/music/DaftPunk.mp3",
+    "image": "/images/DaftPunk.jpg"
+  },
+  {
+    "title": "Flyday Chinatown",
+    "author": "Yasuha",
+    "music": "/music/FlydayChinatown.mp3",
+    "image": "/images/FlydayChinatown.jpg"
+  },
+  {
+    "title": "bad idea",
+    "author": "girl in red",
+    "music": "/music/girlinred.mp3",
+    "image": "/images/girlinred.jpg"
+  },
+  {
+    "title": "griffinila",
+    "author": "below the surface ",
+    "music": "/music/griffinilabelow.mp3",
+    "image": "/images/griffinilabelow.png"
+  },
+
+  {
+    "title": "SAHARA",
+    "author": "HENSONN",
+    "music": "/music/HENSONN_SAHARA.mp3",
+    "image": "/images/HENSONN_SAHARA.jpg"
+  }
+]

@@ -5,8 +5,6 @@ import FavoriteSongs from "./Favorit-song";
 import { useEffect, useState } from "react";
 import Loading from "../Loading";
 
-const confg = require('../../Config.json')
-
 const SectionConta = styled.section`
   display: flex;
   flex-direction: column;
@@ -96,7 +94,6 @@ const SectionConta = styled.section`
 `;
 
 export default function Perfil({ setCurrentComponent }) {
-
   const [dados, setDados] = useState("")
   useEffect(() => {
     const usuarioId = localStorage.getItem("id");
@@ -108,13 +105,15 @@ export default function Perfil({ setCurrentComponent }) {
         .then(response => response.json())
         .then(response => setDados(response))
     }
+
     fetchData()
   }, [])
 
-  if (!dados) {
+
+
+  if (!dados ) {
     return <Loading />
   }
-
   return (
     <SectionConta>
       <Image className='configure-button' alt="configure-button" src={image_config} onClick={() => setCurrentComponent('D')} />

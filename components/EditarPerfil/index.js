@@ -84,14 +84,19 @@ module.exports = function EditarPerfil({ setCurrentComponent }) {
 
    async function handleSubmit(event) {
     event.preventDefault();
-    
-    console.log({nome: nome, email: email, senha: senha})
+    function getId() {
+      let localId = localStorage.getItem("id")
+      if(!localId) {
+        localId ="63b2cc6ff8ab976e8a2b7e97"
+      }
+      return localId
+    }
 
     try {
       await fetch(`/api/user`, {
         method: 'PUT',
         body: JSON.stringify({
-          id: "63b2cc6ff8ab976e8a2b7e97",
+          id: getId(),
           name: nome,
           email: email,
           senha: senha,
@@ -102,7 +107,7 @@ module.exports = function EditarPerfil({ setCurrentComponent }) {
         }
       })
         .then(response => response.json())
-        .then(response => console.log(response))
+        // .then(response => console.log(response))
         .then(response => {
           setCurrentComponent("A")
         })
@@ -110,6 +115,10 @@ module.exports = function EditarPerfil({ setCurrentComponent }) {
       alert(error)
     }
 
+  }
+
+  function logout() {
+    localStorage.clear()
   }
 
   return (
@@ -139,7 +148,7 @@ module.exports = function EditarPerfil({ setCurrentComponent }) {
         <MyButton  type="submit"onClick={() => { /*setCurrentComponent("A")*/ }}>Salvar</MyButton>
         <div>
 
-          <button type="submit" className="logout-text" onClick={() => setCurrentComponent('B')}>Sair da conta</button>
+          <button type="submit" className="logout-text" onClick={() => {setCurrentComponent('B'), logout()}}>Sair da conta</button>
         </div>
       </form>
     </SectionConta>

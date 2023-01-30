@@ -73,9 +73,9 @@ module.exports = function Conta({ setCurrentComponent }) {
           if (response.erro) {
             throw new Error("Usuario com esse email ja existe")
           }else(
-            console.log(response),
+            // console.log(response),
             localStorage.setItem('id', response.user.id),
-            console.log(localStorage.getItem('id')),
+            // console.log(localStorage.getItem('id')),
             setCurrentComponent("A")
 
           )
