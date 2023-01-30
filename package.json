@@ -2,13 +2,13 @@
   "name": "radio_2.0",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
-  "license": "MIT",
   "dependencies": {
     "@next/font": "13.0.7",
     "@prisma/client": "^4.8.0",
@@ -18,6 +18,7 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.6",
+    "url-loader": "^4.1.1",
     "use-sound": "^4.0.1"
   },
   "resolutions": {
