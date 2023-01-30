@@ -1,7 +1,7 @@
 const { default: styled } = require("styled-components");
 import MyButton from "../Button"
 import GoogleButton from "../GoogleButton";
-import FacebookButton from "../FacebookButton";
+// import FacebookButton from "../FacebookButton";
 import Input from "../Input";
 import { useState } from "react";
 
@@ -101,7 +101,7 @@ module.exports = function Entrar({ setCurrentComponent }) {
 
       <div className="Logins__button">
         <GoogleButton>Login com o google</GoogleButton>
-        <FacebookButton>Login com o facebook</FacebookButton>
+        {/* <FacebookButton>Login com o facebook</FacebookButton> */}
       </div>
 
       <span className="Text__ou">ou</span>
